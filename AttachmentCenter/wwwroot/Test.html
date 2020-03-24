@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传示例</title>
+    <script type="text/javascript">
+        function UploadCompleteF( files,fileRsp) {
+            /*参数说明 ，
+             * files ，上传的文件列表，里面包含上传结果。
+             * file对象属性
+             * 属性/方法	描述
+                id	文件id
+                name	文件名，例如"myfile.gif"
+                type	文件类型，例如"image/jpeg"
+                size	文件大小，单位为字节，当启用了客户端压缩功能后，该值可能会改变
+                origSize	文件的原始大小，单位为字节
+                loaded	文件已上传部分的大小，单位为字节
+                percent	文件已上传部分所占的百分比，如50就代表已上传了50%
+                status	文件的状态，可能为以下几个值之一：plupload.QUEUED 1, plupload.UPLOADING 2, plupload.FAILED 4, plupload.DONE 5
+                lastModifiedDate	文件最后修改的时间
+                getNative()	获取原生的文件对象
+                getSource()	获取mOxie.File 对象，想了解mOxie是什么东西，可以看下https://github.com/moxiecode/moxie/wiki/API
+                destroy()	销毁文件对象
+             * 
+             */
+            alert(fileRsp[0].originalName + "上传完成了！");
+            //生成下载链接。
+            document.getElementById("uploadPath").href = "/Upload/testDic/" +fileRsp[0].saveName;
+        }
+        function Error(errObject) {
+            /*errObject 有三个属性
+             * code：错误代码，GENERIC_ERROR	值为-100，发生通用错误时的错误代码
+                                HTTP_ERROR	值为-200，发生http网络错误时的错误代码，例如服务气端返回的状态码不是200
+                                IO_ERROR	值为-300，发生磁盘读写错误时的错误代码，例如本地上某个文件不可读
+                                SECURITY_ERROR	值为-400，发生因为安全问题而产生的错误时的错误代码
+                                INIT_ERROR	值为-500，初始化时发生错误的错误代码
+                                FILE_SIZE_ERROR	值为-600，当选择的文件太大时的错误代码
+                                FILE_EXTENSION_ERROR	值为-601，当选择的文件类型不符合要求时的错误代码
+                                FILE_DUPLICATE_ERROR	值为-602，当选取了重复的文件而配置中又不允许有重复文件时的错误代码
+                                IMAGE_FORMAT_ERROR	值为-700，发生图片格式错误时的错误代码
+                                IMAGE_MEMORY_ERROR	当发生内存错误时的错误代码
+                                IMAGE_DIMENSIONS_ERROR	值为-702，当文件大小超过了plupload所能处理的最大值时的错误代码
+
+            file：与该错误相关的文件对象
+
+            message：错误信息*/
+            alert(errObject.message);
+        }
+    </script>
+</head>
+<body>
+    <iframe src="UploadFileQueue.html?v=1.2" id="iframeFileupload2018" width="800" height="500" virtualDic="testDic" maxFileSize="1000mb" Error="" UploadComplete="UploadCompleteF"></iframe>
+    <br />
+    <a id="uploadPath" href=""><b>测试文件获取</b> </a>  &nbsp;&nbsp;&nbsp;&nbsp;
+
+</body>
+</html>

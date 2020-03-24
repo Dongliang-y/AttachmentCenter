@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传</title>
+    <link href="Scripts/jquery.plupload.queue/css/jquery.plupload.queue.css" rel="stylesheet" />
+    <script src="Scripts/jquery-1.7.2.min.js"></script>
+    <!-- Third party script for BrowserPlus runtime (Google Gears included in Gears runtime now) -->
+    <script src="Scripts/browserplus-min.js"></script>
+    <script src="Scripts/plupload.full.js"></script>
+    <script type="text/javascript" src="Scripts/jquery.plupload.queue/jquery.plupload.queue.js"></script>
+    <script src="Scripts/i18n/zh-cn.js"></script>
+    <script type="text/javascript">
+        var serverUrl = "/";
+        /*options 请求问题
+         * 那么, 什么情况下请求会变成preflighted request呢?
+
+1、请求方法不是GET/HEAD/POST
+2、POST请求的Content-Type并非application/x-www-form-urlencoded, multipart/form-data, 或text/plain
+3、请求设置了自定义的header字段
+        /*
+*获取url 的QueryString 参数
+*/
+        onerror = handleError
+        function handleError(msg, url, l) {
+            　　var txt = "There was an error on this page.\n\n"
+            　　　　txt += "Error: " + msg + "\n"
+            　　　　txt += "URL: " + url + "\n"
+            　　　　txt += "Line: " + l + "\n\n"
+            　　　　txt += "Click OK to continue.\n\n"
+            　　　　alert(txt)
+            　　　　return true
+        } 
+        // Convert divs to queue widgets when the DOM is ready
+        $(function () {
+            var virtualDic = $($(window.parent.document).find("#iframeFileupload2018")[0]).attr("virtualDic");// $(window.top).attr("virtualDic");
+            var maxFileSize = "1000mb";
+            var cfgMax = $($(window.parent.document).find("#iframeFileupload2018")[0]).attr("maxFileSize");// $(window.top).attr("maxFileSize");
+            if (cfgMax && cfgMax != "") {
+                maxFileSize = cfgMax;
+            }
+            var UploadComplete = $($(window.parent.document).find("#iframeFileupload2018")[0]).attr("UploadComplete");//$(window.top).attr("UploadComplete");
+            var Error = $($(window.parent.document).find("#iframeFileupload2018")[0]).attr("Error");//$(window.top).attr("UploadComplete");
+
+            $("#uploader").pluploadQueue({
+                // General settings
+                runtimes: 'gears,flash,silverlight,browserplus,html5', // 这里是说用什么技术引擎
+                url: serverUrl + 'UploadFile/Upload?virtualDic=' + virtualDic, // 服务端上传路径
+                max_file_size: maxFileSize, // 文件上传最大限制。
+                chunk_size: '10mb', // 上传分块每块的大小，这个值小于服务器最大上传限制的值即可。
+                multipart: true,
+                max_retries:5,
+                // Resize images on clientside if we can
+                //// 是否生成缩略图（仅对图片文件有效）
+                resize: { width: 320, height: 240, quality: 90 },
+
+                // Specify what files to browse for
+                ////  这个数组是选择器，就是上传文件时限制的上传文件类型
+                filters: [
+                    { title: "Office files", extensions: "doc,docx,xls,xlsx,pdf" },
+                    { title: "Image files", extensions: "jpg,gif,png" },
+                    { title: "Zip files", extensions: "zip,rar,7z" },
+                    { title: "mp4 files", extensions: "mp4" }
+                ],
+
+                // Flash settings
+                // plupload.flash.swf 的所在路径
+                flash_swf_url: 'Scripts/plupload.flash.swf',
+
+                // Silverlight settings
+                // silverlight所在路径
+                silverlight_xap_url: 'Scripts/plupload.silverlight.xap',
+                init: {
+                    UploadComplete: function (uploader, files, rspFiles) {
+                        var rfiles = JSON.parse(rspFiles.response).datas;
+                        if (typeof (eval("window.parent." + UploadComplete)) == "function") {
+                            var f = eval("window.parent." + UploadComplete + "(files,rfiles)");
+                        }
+                    },
+                    Error: function (uploader, errObject) {
+                        if (typeof (eval("window.parent." + Error)) == "function") {
+                            var f = eval("window.parent." + Error + "(errObject)");
+                        }
+                        else
+                        alert(errObject.message);
+                    },
+                    BeforeUpload: function (uploader, file) {
+                        uploader.settings.multipart_params = {
+                            filename: file.name
+                        };
+                    }
+                }
+            });
+
+
+            // Client side form validation
+            $('form').submit(function (e) {
+                var uploader = $('#uploader').pluploadQueue();
+
+                // Files in queue upload them first
+                if (uploader.files.length > 0) {
+                    // When all files are uploaded submit form
+                    uploader.bind('StateChanged', function () {
+                        if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+                            $('form')[0].submit();
+                        }
+                    });
+                   uploader.start();
+                } else
+                    alert('您至少上传一个文件。');
+
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <h2>一次选择多个文件进行上传</h2>
+        </div>
+        <div id="uploader" style="width: 600px">
+            <p>正在初始化。</p>
+        </div>
+    </form>
+</body>
+</html>

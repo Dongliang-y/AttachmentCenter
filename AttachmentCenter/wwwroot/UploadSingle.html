@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>文件上传</title>
+    <script type="text/javascript" src="Scripts/jquery-1.7.2.min.js"></script>
+    <style>
+        dl dt {
+            width: 100px;
+            float: left;
+        }
+        
+    </style>
+</head>
+<body>
+    <form action="UploadFile/Upload?virtualDic=testWater&waterText=waterText&createThumbnail=true"
+          enctype="multipart/form-data" id="uploadForm"
+          method="post">
+        <dl>
+            <dt>
+                <label for="FileUpload_FormFile">File：</label>
+            </dt>
+            <dd>
+                <input id="FileUpload_FormFile" type="file"
+                       name="FileUpload.FormFile" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <label for="waterText">水印文字：</label>
+            </dt>
+            <dd>
+                <input id="waterText" type="text"
+                       name="waterText" value="水印文字test" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+                <label for="createThumbnail">生成缩略图：</label>
+            </dt>
+            <dd>
+                <input id="createThumbnail" type="text"
+                       name="createThumbnail" value="true" />
+            </dd>
+        </dl>
+        <dl>
+            <dt>
+            </dt>
+            <dd>
+                <input class="btn" type="button" value="上传" id="btnSubmit" />
+            </dd>
+        </dl>
+    </form>
+
+
+    <div>
+        <img src="" id="imgRstThumbnail" />
+        <br />
+        <img src="" id="imgRst" />
+    </div>
+    <script>
+        function setlogo() {
+            //ajax
+            $.ajax({
+                type: 'POST',
+                url: "UploadFile/Upload?virtualDic=testWater&waterText=" + encodeURI($("#waterText").val()) + "&createThumbnail=" + $("#createThumbnail").val(),
+                dataType: "text",
+                data: new FormData($('#uploadForm')[0]),
+                cache: false,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    var files = JSON.parse(res); 
+                    if (files.success) {
+                        if (files.datas && files.datas.length > 0) {
+                            //所有接口皆为异步，所以需等待。
+                            setTimeout(function () {
+                                var name = files.datas[0].saveName
+                                $("#imgRst").attr("src", "/Upload/testWater/" + name);
+                                var idx = name.lastIndexOf(".");
+                                var tname = name.slice(0, idx) + 'Thumbnail' + name.slice(idx);
+                                $("#imgRstThumbnail").attr("src", "/Upload/testWater/" + tname)
+                            }, 3000);
+
+                        }
+                        else {
+                            alert(files.message)
+                        }
+                    }
+                    else {
+                        alert(files.message)
+                    }
+                }
+            })
+
+            //ajax
+        }
+        $(function () {
+            $("#btnSubmit").on("click", function () {
+                setlogo();
+            });
+        });
+    </script>
+</body>
+</html>
