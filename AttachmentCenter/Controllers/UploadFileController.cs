@@ -104,7 +104,7 @@ namespace AttachmentCenter.Controllers
                 if (foundFileInfo != null)
                 {
                     var memoryStream = new MemoryStream((int)foundFileInfo.Length);
-                    using (var stream = new FileStream(foundFileInfo.FullName, FileMode.Open))
+                    using (var stream = new FileStream(foundFileInfo.FullName, FileMode.Open, FileAccess.Read, FileShare.Read))
                     {
                         await stream.CopyToAsync(memoryStream);
                     }
@@ -221,7 +221,10 @@ namespace AttachmentCenter.Controllers
                                 {
                                     System.IO.File.Move(fileName, newfilepath);
                                 }
-                                files.Add(new FileResultDto() { OriginalName = hisName, SaveName = newName});
+
+                                var thumbnailName = FileProcess.Process(new FileInfo(newfilepath), waterText);
+
+                                files.Add(new FileResultDto() { OriginalName = hisName, SaveName = newName, ThumbnailName = thumbnailName });
                             }
                         }
                     }

@@ -47,12 +47,12 @@
                 runtimes: 'gears,flash,silverlight,browserplus,html5', // 这里是说用什么技术引擎
                 url: serverUrl + 'UploadFile/Upload?virtualDic=' + virtualDic, // 服务端上传路径
                 max_file_size: maxFileSize, // 文件上传最大限制。
-                chunk_size: '10mb', // 上传分块每块的大小，这个值小于服务器最大上传限制的值即可。
+                chunk_size: '1mb', // 上传分块每块的大小，这个值小于服务器最大上传限制的值即可。
                 multipart: true,
                 max_retries:5,
                 // Resize images on clientside if we can
                 //// 是否生成缩略图（仅对图片文件有效）
-                resize: { width: 320, height: 240, quality: 90 },
+               // resize: { width: 320, height: 240, quality: 90 },
 
                 // Specify what files to browse for
                 ////  这个数组是选择器，就是上传文件时限制的上传文件类型
