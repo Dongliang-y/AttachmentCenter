@@ -1,10 +1,430 @@
 ﻿<!DOCTYPE html>
-<html lang="zh">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <title>文件服务V BETA 1.0.2</title>
+<title>Readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
 </head>
 <body>
-    <h1 id="h1-readme"><a name="Readme" class="reference-link"></a><span class="header-link octicon octicon-link"></span>Readme</h1><h2 id="h2-u6587u4EF6u4E0Au4F20"><a name="文件上传" class="reference-link"></a><span class="header-link octicon octicon-link"></span>文件上传</h2><ol> <li>接口地址：</li></ol> <ul> <li>url:服务器地址/UploadFile/Upload?virtualDic&amp;waterText&amp;createThumbnail=false</li><li>virtualDic 参数是必须的，建议规划好文件夹结构例如：“virtualDic=xx项目/xxx模块”</li><li>aterText: 图片水印，字符参数，可选。</li><li>createThumbnail，是否启用，bool参数，可选的。 缩略图是生成正方形或者按比率缩放是在服务端配置文件里调整的。</li><li>返回的结构:</li></ul> <pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="pun">{</span></code></li><li class="L1"><code><span class="pln"> </span><span class="pun">{</span></code></li><li class="L2"><code><span class="pln"> </span><span class="str">"datas"</span><span class="pun">:</span><span class="pln"> </span></code></li><li class="L3"><code><span class="pln"> </span><span class="pun">[</span><span class="pln"> </span><span class="com">//多文件上传，此处返回的即为多个对象。</span></code></li><li class="L4"><code><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span></code></li><li class="L5"><code><span class="pln"> </span><span class="str">"originalName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"测试测试sdfsf+ _@#￥.png"</span><span class="pun">,</span><span class="pln"> </span></code></li><li class="L6"><code><span class="pln"> </span><span class="str">"saveName"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"%E6%B5%8B%E8%AF%95%E6%B5%8B%E8%AF%95sdfsf%2B%20_%40%23%E F%BF%A5_S_20200107141957202.png"</span><span class="pln"> </span></code></li><li class="L7"><code><span class="pln"> </span><span class="pun">}</span><span class="pln"> </span></code></li><li class="L8"><code><span class="pln"> </span><span class="pun">],</span></code></li><li class="L9"><code><span class="pln"> </span><span class="str">"message"</span><span class="pun">:</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span></code></li><li class="L0"><code><span class="pln"> </span><span class="str">"success"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span></code></li><li class="L1"><code><span class="pln"> </span><span class="pun">}</span></code></li><li class="L2"><code><span class="pun">}</span></code></li></ol></pre><ol> <li>简单文件上传：</li></ol> <p>可以用传统的file表单，可以用第三方的upload插件，只要满足提交到后台的文件时存储在 Request.Form.Files对象中即可（传统文件上传皆如此），<br>同时提交一个url参数“virtualDic=你文件存储到服务器的目标文件夹 </p><p>3.多文件上传：</p> <p>满足条件2的情况下，同时向服务器提交多个文件即可。</p> <p>4.大文件分块上传：</p> <p>满足条件2，多文件满足条件3，另外分块大小不能大于服务器设定的上传限制，整体大小不限。</p> <pre class="prettyprint linenums prettyprinted" style=""><ol class="linenums"><li class="L0"><code><span class="pun">额外</span><span class="typ">Form</span><span class="pun">参数：</span></code></li><li class="L1"><code><span class="pln">name</span><span class="pun">：</span><span class="pln"> </span><span class="pun">文件原始名称（每次分块上传的是分块名称，而且每个分块名称必须唯一，所以需要传递一个原始文件名）</span></code></li><li class="L2"><code><span class="pln">chunk</span><span class="pun">：</span><span class="pln"> </span><span class="pun">当前分块序号，</span><span class="kwd">int</span><span class="pun">类型，索引从</span><span class="lit">0</span><span class="pun">开始。</span></code></li><li class="L3"><code><span class="pln">chunks</span><span class="pun">：</span><span class="pln"> </span><span class="pun">总的分块数，</span><span class="kwd">int</span><span class="pun">类型。</span></code></li></ol></pre><p>5.水印和缩略图：</p> <p>满足条件2，3 。水印和缩略图只针对图片有效。 单文件、多文件上传均生效、分块上传无效。</p> <h2 id="h2-u6587u4EF6u83B7u53D6"><a name="文件获取" class="reference-link"></a><span class="header-link octicon octicon-link"></span>文件获取</h2><ol> <li>获取文件</li></ol> <ul> <li><p>风格1：<a href="http://xxxx/Upload/上传时指定的虚拟目录/上传时返回的saveName">http://xxxx/Upload/上传时指定的虚拟目录/上传时返回的saveName</a></p> </li><li><p>风格2：<a href="http://xxxx/UploadFile/Get?FileName=xxx.jpg">http://xxxx/UploadFile/Get?FileName=xxx.jpg</a><br> GET:服务器地址/UploadFile/Files/“上传时返回的saveName” </p></li><li><p>缩略图文件获取：方式与上述两种风格相同， 文件名在saveName基础上追加Thumbnail。</p> </li><li><p><strong>举个栗子：</strong><br>服务器地址是:<a href="http://39.106.163.216:5001">http://39.106.163.216:5001</a><br>上传原文件名是：ql-2.jpg<br>上传的目录是 project/Reports<br>服务器返回一个： “saveName”: “ql-2_S_20200108155128215Thumbnail.jpg”<br>原图地址1：<a href="http://39.106.163.216:5001/UploadFile/Get?FileName=ql-2_S_20200108155128215.jpg">http://39.106.163.216:5001/UploadFile/Get?FileName=ql-2_S_20200108155128215.jpg</a><br>缩略图地址1：<a href="http://39.106.163.216:5001/UploadFile/Get?FileName=ql-2_S_20200108155128215Thumbnail.jpg">http://39.106.163.216:5001/UploadFile/Get?FileName=ql-2_S_20200108155128215Thumbnail.jpg</a><br>原图地址2：<a href="http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215.jpg">http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215.jpg</a><br>缩略图地址2：<a href="http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215Thumbnail.jpg">http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215Thumbnail.jpg</a><br><strong>两者差别就是:</strong><br>第一个种不用带目录，浏览器能当附件下载（常用于附件)<br>第二种要带目录，支持在线播放（视频），在线预览 </p></li></ul> <h2 id="h2-u6587u4EF6u5220u9664"><a name="文件删除" class="reference-link"></a><span class="header-link octicon octicon-link"></span>文件删除</h2><ol> <li>删除文件 DELETE: </li></ol> <p>服务器地址/UploadFile/Delete/“上传时返回的saveName”</p> <h2 id="h2-u793Au4F8B"><a name="示例" class="reference-link"></a><span class="header-link octicon octicon-link"></span>示例</h2><p><a href="/Test.html">多文件上传示例</a></p> <p><a href="/UploadSingle.html">单文件上传示例</a></p> <h2 id="h2--"><a name="更新日志：" class="reference-link"></a><span class="header-link octicon octicon-link"></span>更新日志：</h2><p>2020 -1-9 ：Version Beta 1.0.2修复MP4在线播放的bug，处理rar文件下载后大小变化的BUG。<br>2020 -1-8 ：Version Beta 1.0.1增加缩略图功能、增加文件直接访问的方式、增加单个文件上传示例、增加首页说明文档。 </p><h2 id="h2-u95EEu9898u53CDu9988"><a name="问题反馈" class="reference-link"></a><span class="header-link octicon octicon-link"></span>问题反馈</h2><p>qq 270535197</p>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%E9%99%84%E4%BB%B6%E5%AD%98%E5%82%A8%E6%9C%8D%E5%8A%A1%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">附件存储服务使用说明</h1>
+<h3 id="%E4%B8%80%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0">一、文件上传</h3>
+<p><strong>1. 接口地址：</strong></p>
+<ul>
+<li>url:服务器地址/UploadFile/Upload?virtualDic&amp;waterText&amp;createThumbnail=false</li>
+<li>virtualDic 参数是必须的，建议规划好文件夹结构例如：“virtualDic=xx项目/xxx模块”</li>
+<li>aterText: 图片水印，字符参数，可选。</li>
+</ul>
+<p>返回的结构:</p>
+<pre class="hljs"><code><div>{
+	&quot;datas&quot;: [
+		{
+			&quot;originalName&quot;: &quot;20200113113029img.png&quot;,
+			&quot;saveName&quot;: &quot;20200113113029img_S_20200402102054809.png&quot;,
+			&quot;virtulPath&quot;: &quot;/Upload/testDic/20200113113029img_S_20200402102054809.png&quot;,
+			&quot;thumbnailVirtulPath&quot;: &quot;/Upload/testDic/20200113113029img_S_20200402102054809Thumbnail.png&quot;,
+			&quot;thumbnailName&quot;: &quot;20200113113029img_S_20200402102054809Thumbnail.png&quot;
+		}
+	],
+	&quot;message&quot;: &quot;&quot;,
+	&quot;success&quot;: true
+}
+</div></code></pre>
+<p><strong>2. 简单文件上传：</strong></p>
+<p>可以用传统的file表单，可以用第三方的upload插件，只要满足提交到后台的文件时存储在 Request.Form.Files对象中即可（传统文件上传皆如此），
+同时提交一个url参数“virtualDic=你文件存储到服务器的目标文件夹</p>
+<p><strong>3.多文件上传：</strong></p>
+<p>满足条件2的情况下，同时向服务器提交多个文件即可。</p>
+<p><strong>4.大文件分块上传：</strong></p>
+<p>满足条件2，多文件满足条件3，另外分块大小不能大于服务器设定的上传限制，整体大小不限。</p>
+<pre class="hljs"><code><div>额外Form参数：
+name： 文件原始名称（每次分块上传的是分块名称，而且每个分块名称必须唯一，所以需要传递一个原始文件名）
+chunk： 当前分块序号，int类型，索引从0开始。
+chunks： 总的分块数，int类型。
+</div></code></pre>
+<p><strong>5.水印和缩略图：</strong></p>
+<p>满足条件2，3 。水印和缩略图只针对图片有效。 单文件、多文件上传均生效、分块上传无效。</p>
+<h3 id="%E4%BA%8C%E6%96%87%E4%BB%B6%E8%8E%B7%E5%8F%96">二、文件获取</h3>
+<ul>
+<li>获取文件 http://xxxx/Upload/上传时指定的虚拟目录/上传时返回的saveName</li>
+</ul>
+<p>例：http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215.jpg</p>
+<ul>
+<li>缩略图文件获取：文件名在saveName基础上追加Thumbnail。
+例子：http://39.106.163.216:5001/Upload/project/Reports/ql-2_S_20200108155128215Thumbnail.jpg</li>
+</ul>
+<h3 id="%E4%B8%89%E6%96%87%E4%BB%B6%E5%88%A0%E9%99%A4">三、文件删除</h3>
+<ol start="6">
+<li>删除文件 DELETE:</li>
+</ol>
+<p>服务器地址/UploadFile/Delete/“上传时返回的saveName”</p>
+<h3 id="%E5%9B%9B%E7%A4%BA%E4%BE%8B">四、示例</h3>
+<p><a href="/Test.html">多文件上传示例</a></p>
+<p><a href="/UploadSingle.html">单文件上传示例</a></p>
+<h3 id="%E4%BA%94%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97">五、更新日志：</h3>
+<p>2020-4-2 ： 调整返回结构，更新文档。</p>
+<p>2020 -1-9 ：Version Beta 1.0.2修复MP4在线播放的bug，处理rar文件下载后大小变化的BUG。</p>
+<p>2020 -1-8 ：Version Beta 1.0.1增加缩略图功能、增加文件直接访问的方式、增加单个文件上传示例、增加首页说明文档。</p>
+<h3 id="%E9%97%AE%E9%A2%98%E5%8F%8D%E9%A6%88">问题反馈</h3>
+<p>yidongliang123@163.com</p>
+
 </body>
 </html>

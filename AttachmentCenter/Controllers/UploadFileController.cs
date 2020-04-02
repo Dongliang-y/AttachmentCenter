@@ -189,7 +189,20 @@ namespace AttachmentCenter.Controllers
                             {
                                 uploadFile.SaveFile(newfilepath);
                                 var thumbnailName= FileProcess.Process(new FileInfo(newfilepath), waterText);
-                                files.Add(new FileResultDto() { OriginalName = uploadFile.FileName, SaveName = newName, ThumbnailName = thumbnailName });
+
+                                var fileRst = new FileResultDto()
+                                {
+                                    OriginalName = uploadFile.FileName,
+                                    SaveName = newName,
+                                    ThumbnailName = thumbnailName,
+                                    VirtulPath = $"/Upload/{ HttpUtility.UrlDecode(virtualDic) }/{newName}"
+                                };
+                                if (!string.IsNullOrEmpty(thumbnailName))
+                                {
+                                    fileRst.ThumbnailVirtulPath = $"/Upload/{ HttpUtility.UrlDecode(virtualDic) }/{thumbnailName}";
+                                }
+
+                                files.Add(fileRst);
                             }
                         }
                         else
@@ -223,8 +236,18 @@ namespace AttachmentCenter.Controllers
                                 }
 
                                 var thumbnailName = FileProcess.Process(new FileInfo(newfilepath), waterText);
-
-                                files.Add(new FileResultDto() { OriginalName = hisName, SaveName = newName, ThumbnailName = thumbnailName });
+                                var fileRst = new FileResultDto()
+                                {
+                                    OriginalName = hisName,
+                                    SaveName = newName,
+                                    ThumbnailName = thumbnailName,
+                                    VirtulPath = $"/Upload/{ HttpUtility.UrlDecode(virtualDic) }/{newName}"
+                                };
+                                if(!string.IsNullOrEmpty( thumbnailName))
+                                {
+                                    fileRst.ThumbnailVirtulPath = $"/Upload/{ HttpUtility.UrlDecode(virtualDic) }/{thumbnailName}";
+                                }
+                                files.Add(fileRst);
                             }
                         }
                     }

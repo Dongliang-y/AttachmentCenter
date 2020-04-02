@@ -18,6 +18,16 @@ namespace AttachmentCenter.Controllers
         /// 保存的文件名
         /// </summary>
         public string SaveName { get; set; }
+
+        /// <summary>
+        /// 虚拟目录
+        /// </summary>
+        public string VirtulPath { get; set; }
+        /// <summary>
+        /// 虚拟目录
+        /// </summary>
+        public string ThumbnailVirtulPath { get; set; }
+
         /// <summary>
         /// Thumbnail
         /// </summary>
