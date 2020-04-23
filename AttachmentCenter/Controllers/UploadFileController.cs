@@ -116,7 +116,7 @@ namespace AttachmentCenter.Controllers
 
                     var memi = provider.Mappings[foundFileInfo.Extension];
 
-                    var idx = fileName.IndexOf("_S_", StringComparison.Ordinal);
+                    var idx = fileName.ToUpper().IndexOf("_S_", StringComparison.Ordinal);
                     var srcName = fileName;
 
                     if (idx > 0)
